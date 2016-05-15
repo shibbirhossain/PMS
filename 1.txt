@@ -1,0 +1,2 @@
+Elon,1992-01-03,25.0,Standard
+Elon,2016-03-01,150.0,Specialize

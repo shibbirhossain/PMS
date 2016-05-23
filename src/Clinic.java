@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +23,7 @@ import java.util.Iterator;
 
 public class Clinic {
 	//private static final String FILE_NAME = "PatientInfo.txt";
-	private Patient patient;
+	//private Patient patient;
 	//private String clinicName;
 	private ArrayList<Patient> patients;
 
@@ -98,31 +99,7 @@ public class Clinic {
 	}
 
 
-	/**
-	 * Builds all the patients by reading from file
-	 * at the start of the program
-	 *
-	 * @param list patient data which is read from file
-	 * @throws IOException input/ output exception while reading
-	 * 					   from file
-     */
-	private void patientBuilderFromFile(ArrayList<String> list) throws IOException {
-		for(String readByWord : list){
-			
-			String words[] = readByWord.split(",");
-			String patientName = words[0];
-			int medicareNumber = Integer.parseInt(words[1]);
-			LocalDate dateOfBirth = LocalDate.parse(words[2]);
-			patient = new Patient(patientName, medicareNumber, dateOfBirth);
-			patients.add(patient);
-			patient.readAllVisit();
-			//initVisitForEachPatient(patient);
-			
-			//file.write("");
-		}
-		//if(file != null) file.close();
-		
-	}
+
 
 	/**
 	 *
@@ -153,49 +130,6 @@ public class Clinic {
 		for(Patient p : patients){
 			IOSupport.saveData(p, Utility.FILE_NAME);
 			p.saveAllVisits();
-		}
-	}
-
-	/**
-	 * Initializes to read from file at the start of the program
-	 * and sends them to patientBuilderFromFile to build patient
-	 * objects.
-	 * @throws IOException input/output exception while
-	 * 					   reading from file
-     */
-
-	public void initializeFromFile() throws IOException {
-		String line;
-		ArrayList<String> list = new ArrayList<String>();
-
-		//URL path = ClassLoader.getSystemResource(Utility.FILE_NAME);
-		File file = new File(Utility.FILE_NAME);
-//		System.out.println(path.toString());
-
-		if (!file.exists()) {
-			try {
-				throw new HistoryNotFoundException("No file found with such name");
-			} catch (HistoryNotFoundException e) {
-				System.out.println("No File found for the patient");
-				//e.printStackTrace();
-			}
-		} else {
-			FileReader fileReader = new FileReader(file);
-			//FileWriter clearThings = new FileWriter(fileName);
-			BufferedReader reader = new BufferedReader(fileReader);
-
-			while ((line = reader.readLine()) != null) {
-				list.add(line);
-				//System.out.println("initialize from file "+line);
-				//line = reader.readLine();
-			}
-			//clearThings.write("");
-			//System.out.println("initializeFromFile() list.size()"+list.size());
-			if (reader != null) reader.close();
-			if (file != null) fileReader.close();
-			if (list.size() != 0) {
-				patientBuilderFromFile(list);
-			}
 		}
 	}
 }

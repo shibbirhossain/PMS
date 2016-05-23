@@ -23,19 +23,47 @@ public class ScannerValidateInput {
      *
      *  @return number returns the validated integer
      */
-    public static int validateInteger(String showText) {
+    public static String validateInteger(String showText) {
+        Scanner scanner = new Scanner(System.in);
+        String regex = "^[0-9]+$";
+        String input;
+
+        do{
+            System.out.println(showText);
+            input = scanner.nextLine();
+
+        }while(!input.matches(regex));
+        return input;
+    }
+
+    /**
+     * Here, is validated whether the provided
+     * input is a integer or not. Even though,
+     * 0 is an integer the program considers
+     * it as a non-valid input. Because we expect
+     * medicare number to be non zero positive number
+     * and appointment time for Specialize visit should
+     * be non zero positive as well.
+     * @param showText String to be displayed while taking
+     *                 user input.
+     *
+     *  @return number returns the validated integer
+     */
+    public static int validateOption(String showText) {
         Scanner scanner = new Scanner(System.in);
         int number;
+        boolean run = true;
         do {
-        	System.out.print(showText);
+            System.out.print(showText);
             while (!scanner.hasNextInt()) {
-            	String input = scanner.next();
-            	System.out.printf("%s is not a valid input. Please enter any number greater than zero.\n", input);
-            	System.out.print(showText);
-                
+                String input = scanner.next();
+                System.out.printf("%s is not a valid input. Please enter any number greater than zero.\n", input);
+                System.out.print(showText);
+
             }
             number = scanner.nextInt();
-        } while (number <= 0);
+            run = false;
+        } while (run);
 
         return number;
     }
@@ -103,7 +131,7 @@ public class ScannerValidateInput {
         while(run) {
             try {
                 System.out.println(showText);
-                input = scanner.next();
+                input = scanner.nextLine();
 
                 //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
 
@@ -134,7 +162,7 @@ public class ScannerValidateInput {
         do {
             System.out.print(showText);
             while (!scanner.hasNextInt()) {
-                String input = scanner.next();
+                String input = scanner.nextLine();
                 System.out.printf("%s is not a valid number.\n", input);
                 System.out.print(showText);
 
@@ -144,5 +172,4 @@ public class ScannerValidateInput {
 
         return number;
     }
-    
 }

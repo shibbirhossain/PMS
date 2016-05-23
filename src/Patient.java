@@ -15,11 +15,12 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Patient {
-	private int mediacareNumber;
+	private int medicareNumber;
 	private LocalDate dateOfBirth;
 	private String patientName;
 	private ArrayList<Visit> visits;
 	private ArrayList<String> visitList;
+	private Clinic clinic;
 
 	/*
 	 *
@@ -30,11 +31,22 @@ public class Patient {
 	 * @param dateOfBirth date of birth of patient as LocalDate
 	 *
 	 */
-	public Patient(String paitentName, int medicareNumber, LocalDate dateOfBirth) {
-		this.patientName = paitentName;
+	public Patient(String patientName, int medicareNumber, LocalDate dateOfBirth) {
+		this.patientName = patientName;
 		this.dateOfBirth= dateOfBirth;
-		this.mediacareNumber = medicareNumber;
+		this.medicareNumber = medicareNumber;
 		visits = new ArrayList<Visit>();
+		//clinic = new Clinic();
+	}
+
+	public Patient(String patientFile){
+
+		String words[] = patientFile.split(",");
+		this.patientName = words[0];
+		this.medicareNumber = Integer.parseInt(words[1]);
+		this.dateOfBirth = LocalDate.parse(words[2]);
+		visits = new ArrayList<>();
+		//clinic = new Clinic();
 	}
 
 	/**
@@ -64,7 +76,7 @@ public class Patient {
 	 * @return int medicare number of patient as int
      */
 	public int getMedicareNumber(){
-		return mediacareNumber;
+		return medicareNumber;
 	}
 
 	/**
@@ -72,7 +84,7 @@ public class Patient {
 	 * @return String returns a String containing patientName, mediacareNumber, dateOfBirth
      */
 	public String toString(){
-		return patientName + ","+mediacareNumber+","+ dateOfBirth;
+		return patientName + ","+medicareNumber+","+ dateOfBirth;
 	}
 
 	/**
@@ -130,7 +142,7 @@ public class Patient {
 				visitList.add(line);
 			}
 			if (!visitList.isEmpty()) {
-				int index = 0;
+				//int index = 0;
 				for (String v : visitList) {
 					String[] formattedVisit = v.split(",");
 
@@ -191,6 +203,4 @@ public class Patient {
 	public ArrayList<Visit> getVisit() {
 		return visits;
 	}
-
-
 }

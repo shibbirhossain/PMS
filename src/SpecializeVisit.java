@@ -18,7 +18,6 @@ public class SpecializeVisit extends Visit {
      */
     public SpecializeVisit(String doctorName, LocalDate dateOfVisit, int time) {
         super(doctorName, dateOfVisit);
-
         this.fee = calculateFee(time);
     }
 
@@ -28,14 +27,13 @@ public class SpecializeVisit extends Visit {
      *                  from file is passed here to create SpecializeVisit
      */
     public SpecializeVisit(String visitData) {
-
         String[] formattedVisit = visitData.split(",");
-        String doctorName = formattedVisit[0];
-        LocalDate dateOfVisit = LocalDate.parse(formattedVisit[1]);
-        double fee = Double.parseDouble(formattedVisit[2]);
-        this.doctorName = doctorName;
+        this.doctorName = formattedVisit[0];
+        this.dateOfVisit = LocalDate.parse(formattedVisit[1]);
+        this.fee = Double.parseDouble(formattedVisit[2]);
+        /*this.doctorName = doctorName;
         this.dateOfVisit = dateOfVisit;
-        this.fee = fee;
+        this.fee = fee;*/
     }
 
     /**

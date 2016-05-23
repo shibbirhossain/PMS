@@ -29,13 +29,10 @@ public class StandardVisit extends Visit{
      */
     public StandardVisit(String visitData) {
         String[] formattedVisit = visitData.split(",");
-        String doctorName = formattedVisit[0];
-        LocalDate dateOfVisit = LocalDate.parse(formattedVisit[1]);
-        double fee = Double.parseDouble(formattedVisit[2]);
+        this.doctorName = formattedVisit[0];
+        this.dateOfVisit = LocalDate.parse(formattedVisit[1]);
+        this.fee = Double.parseDouble(formattedVisit[2]);
         //String visitType = formattedVisit[3];
-        this.doctorName = doctorName;
-        this.dateOfVisit = dateOfVisit;
-        this.fee = fee;
     }
 
     /**
